@@ -1,6 +1,45 @@
-import React from 'react'
+import { useState } from 'react';
+import Swal from 'sweetalert2';
+import { signupService } from '../services/userService';
+import { useNavigate } from 'react-router-dom';
+import LoadingButton from '../components/LoadingButton';
 
 const SignInForm = () => {
+  const navigate = useNavigate();
+  const [isLoading, setIsLoading] = useState(false);
+  const [formulario, setFormulario] = useState({
+    name: '',
+    lastName: '',
+    email: '',
+    password: '',
+    phone: ''
+  });
+
+  const handleInputChange = (event) => {
+    setFormulario({
+      ...formulario,
+      [event.target.name]: event.target.value
+    });
+  }
+
+  async function createUser(event) {
+    setIsLoading(true);
+    event.preventDefault();
+
+    try {
+      await signupService(formulario);
+      navigate("/login");
+    } catch (err) {
+      Swal.fire(
+        'Mensaje',
+        err.response.data.errors[0].msg,
+        'error'
+      )
+      setIsLoading(false);
+    }
+
+  }
+
   return (
     <>
       <div className="row align-items-center g-lg-5 py-5">
@@ -14,26 +53,41 @@ const SignInForm = () => {
         </div>
 
         <div className="col-md-10 mx-auto col-lg-5">
-          <form className="p-4 p-md-5 border rounded-3 bg-light">
-
+          <form onSubmit={createUser} className="p-4 p-md-5 border rounded-3 bg-light">
             <div className="form-floating mb-3">
               <input
                 type="text"
                 className="form-control"
-                id="floatingPassword"
-                placeholder="FirstName"
+                id="floatingName"
+                name="name"
+                placeholder="Nombre"
+                value={formulario.name} onChange={handleInputChange}
               />
-              <label htmlFor="floatingPassword">First Name</label>
+              <label htmlFor="floatingName">Nombre</label>
             </div>
 
             <div className="form-floating mb-3">
               <input
                 type="text"
                 className="form-control"
-                id="floatingPassword"
-                placeholder="LastName"
+                id="floatingLastName"
+                name="lastName"
+                placeholder="Apellido"
+                value={formulario.lastName} onChange={handleInputChange} 
               />
-              <label htmlFor="floatingPassword">Last Name</label>
+              <label htmlFor="floatingLastName">Apellido</label>
+            </div>
+            <div className="form-floating mb-3">
+              <input
+                type="email"
+                className="form-control"
+                id="floatingEmail"
+                name="email"
+                placeholder="nombre@example.com"
+                
+                value={formulario.email} onChange={handleInputChange}
+              />
+              <label htmlFor="floatingEmail">Correo electrónico</label>
             </div>
 
             <div className="form-floating mb-3">
@@ -41,44 +95,28 @@ const SignInForm = () => {
                 type="password"
                 className="form-control"
                 id="floatingPassword"
-                placeholder="Password"
+                name="password"
+                placeholder="Contraseña"
+                value={formulario.password} onChange={handleInputChange}
               />
-              <label htmlFor="floatingPassword">Password</label>
+              <label htmlFor="floatingPassword">Contraseña</label>
             </div>
 
             <div className="form-floating mb-3">
               <input
                 type="tel"
                 className="form-control"
-                id="floatingInput"
+                id="floatingInputPhone"
+                name="phone"
                 placeholder="555-555-1245"
+                value={formulario.phone} onChange={handleInputChange}
               />
-              <label htmlFor="floatingInput">Phone Number</label>
+              <label htmlFor="floatingInputPhone">Teléfono</label>
             </div>
-
-            <div className="form-floating mb-3">
-              <input
-                type="email"
-                className="form-control"
-                id="floatingInput"
-                placeholder="name@example.com"
-              />
-              <label htmlFor="floatingInput">Email address</label>
-            </div>
-
-            
-            
-            <div className="checkbox mb-3">
-              <label>
-                <input type="checkbox" defaultValue="remember-me" /> Remember me
-              </label>
-            </div>
-            <button className="w-100 btn btn-lg btn-primary" type="submit">
-              Sign up
-            </button>
+            <LoadingButton isLoading={isLoading} text="Registro" />
             <hr className="my-4" />
             <small className="text-muted">
-              By clicking Sign up, you agree to the terms of use.
+              Al hacer clic en Registro, aceptas los terminos y condiciones de uso.
             </small>
           </form>
         </div>

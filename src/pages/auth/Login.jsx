@@ -1,54 +1,87 @@
-import React from 'react'
+import { useState, useContext } from 'react';
+import Swal from 'sweetalert2'
+import { UserContext } from "../../context/UserContext";
+import { useNavigate } from 'react-router-dom';
+import { loginService } from '../../services/authService';
+import LoadingButton from '../../components/LoadingButton';
 
 function Login() {
+  const navigate = useNavigate();
+  const { login } = useContext(UserContext);
+  const [isLoading, setIsLoading] = useState(false);
+  const [formulario, setFormulario] = useState({
+    email: '',
+    password: ''
+  });
+
+  const handleInputChange = (event) => {
+    setFormulario({
+      ...formulario,
+      [event.target.name]: event.target.value
+    });
+  }
+
+  async function loginForm(event) {
+    setIsLoading(true);
+    event.preventDefault();
+
+
+    try {
+      const user = await loginService(formulario);
+      login(user);
+      navigate("/cars");
+    } catch (err) {
+      Swal.fire(
+        'Mensaje',
+        err.response.data.msg,
+        'error'
+      )
+      setIsLoading(false);
+    }
+  }
+
+
   return (
     <>
-    <body class="h-100">
-      <div class="container h-100">
-        <div clas="row h-100 justify-content-center align-items-center">
-          <form className="w-25 p-3" >
+      <body class="h-100">
+        <div class="container h-100">
+          <div clas="row h-100 justify-content-center align-items-center">
+            <form onSubmit={loginForm} className="p-3" >
+              <h1>Inicio de sesión</h1>
               <div className="mb-3">
                 <label htmlFor="exampleInputEmail1" className="form-label">
-                  Email address
+                  Correo electrónico
                 </label>
                 <input
                   type="email"
+                  placeholder='Correo electriónico'
                   className="form-control"
                   id="exampleInputEmail1"
-                  aria-describedby="emailHelp"
+                  name="email"
+                  aria-describedby="emailHelp" value={formulario.email} onChange={handleInputChange}
                 />
                 <div id="emailHelp" className="form-text">
-                  We'll never share your email with anyone else.
+                  Nunca compartiremos su informacion con nadie.
                 </div>
               </div>
               <div className="mb-3">
                 <label htmlFor="exampleInputPassword1" className="form-label">
-                  Password
+                  Contraseña
                 </label>
                 <input
+                  placeholder='Contraseña'
                   type="password"
                   className="form-control"
-                  id="exampleInputPassword1"
+                  name="password"
+                  id="exampleInputPassword1" value={formulario.password} onChange={handleInputChange}
                 />
               </div>
-              <div className="mb-3 form-check">
-                <input
-                  type="checkbox"
-                  className="form-check-input"
-                  id="exampleCheck1"
-                />
-                <label className="form-check-label" htmlFor="exampleCheck1">
-                  Check me out
-                </label>
-              </div>
-              <button type="submit" className="btn btn-primary">
-                Submit
-              </button>
-          </form>
-        </div>
+              <LoadingButton isLoading={isLoading} text="Inicio"/>
+            </form>
+          </div>
         </div>
       </body>
-      
+
     </>
   );
 }

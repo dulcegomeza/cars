@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const URL = `${process.env.REACT_APP_API_URL}/products`;
+const URL = `${process.env.REACT_APP_API_URL}/brands`;
 
 export const getBrandsService = async() => {
     const resp = await axios.get(URL);
