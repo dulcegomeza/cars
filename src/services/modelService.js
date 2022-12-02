@@ -8,3 +8,15 @@ export const getModelsService = async() => {
     return resp.data;
 }
 
+export const getModelsPaginateService = async (data) => {
+
+    const result = await axios.post(`${URL}/paginate`, data) 
+    console.log(result); 
+    return result.data;
+  };
+
+  export const getModelByIdService = async(uid)=>{
+    console.log(uid);
+    const resp = await axios.get(`${URL}/${uid}`);
+    return resp.data;
+}

@@ -1,6 +1,6 @@
 import { Navigate, Route, Routes} from 'react-router-dom'
 import Home from '../pages/Home'
-import Cars from '../pages/Cars'
+import Cars from '../pages/cars/Cars'
 import Login from '../pages/auth/Login'
 import SignInForm from '../pages/SignInForm'
 import Navbar from '../components/Navbar'
