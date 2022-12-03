@@ -33,12 +33,12 @@ function ModelProvider({ children }) {
         
           return {
             uid: obj._id,
-            name: obj.name,
+            model: obj.model,
             description: obj.description,
-            imgsUrl: obj.imgsUrl,
+            imgs: obj.imgs,
             price: obj.price,
-            discount: obj.discount,
-            discount_percentaje: obj.discount_percentaje,
+            year: obj.year,
+            brand: obj.brand
           };
         });
 
@@ -69,13 +69,13 @@ function ModelProvider({ children }) {
 
     const model = {
       uid: res._id,
-      name: res.name,
-      category: res.category.name,
+      model: res.model,
       description: res.description,
-      imgsUrl: res.imgsUrl,
+      imgs: res.imgs,
       price: res.price,
-      discount: res.discount,
-      discount_percentaje: res.discount_percentaje,
+      year: res.year,
+      brand: res.brand,
+      stock: res.stock
     };
 
     dispatch(
@@ -93,12 +93,13 @@ function ModelProvider({ children }) {
     
     const model = {
       uid: res._id,
-      name: res.name,
+      model: res.model,
       description: res.description,
-      imgsUrl: res.imgsUrl,
+      imgs: res.imgs,
       price: res.price,
-      discount: res.discount,
-      discount_percentage: res.discount_percentage
+      year: res.year,
+      brand: res.brand,
+      stock: res.stock
     };
 
     const findModel = modelState.cart.find((model) => {

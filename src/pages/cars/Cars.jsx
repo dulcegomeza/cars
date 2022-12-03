@@ -1,11 +1,61 @@
-import React from 'react'
+import { useContext, useEffect, useState } from 'react';
+import { NavLink } from "react-router-dom";
+import ModelContext from '../../context/ModelContext';
+import { UserContext } from "../../context/UserContext";
+
+import Button from 'react-bootstrap/Button';
+import ButtonGroup from 'react-bootstrap/ButtonGroup';
+import ButtonToolbar from 'react-bootstrap/ButtonToolbar';
+import Pagination from 'react-bootstrap/Pagination';
 
 function Cars() {
+  let items = [];
+  const { user, verifyingToken } = useContext(UserContext);
+
+  const { models, total, total_pages, getModels, addModelCart } = useContext(ModelContext);
+  const [limit, setLimit] = useState(9);
+
+  useEffect(() => {
+    verifyingToken();
+  }, [verifyingToken]);
+
+  useEffect(() => {
+    getModels(1, limit);
+  }, [limit, getModels]);
+
+
+  const loadPage = (number) => {
+    getModels(number, limit);
+  }
+
+  for (let number = 1; number <= total_pages; number++) {
+    items.push(
+      <Pagination.Item onClick={() => loadPage(number)} key={number} >
+        {number}
+      </Pagination.Item>,
+    );
+  }
+
+
   return (
     <>
       <div className="album py-5 bg-light">
         <div className="container">
-          <div className="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+          <div className="row mb-2">
+            <ButtonToolbar
+              className="justify-content-end mb-4"
+              aria-label="Toolbar with Button groups"
+            >
+
+              <h5 className='p-2'>{total} resultados</h5>
+              <ButtonGroup aria-label="First group">
+                <Button onClick={() => setLimit(9)} variant="secondary">9</Button>{' '}
+                <Button onClick={() => setLimit(15)} variant="secondary">15</Button>{' '}
+                <Button onClick={() => setLimit(45)} variant="secondary">45</Button>{' '}
+                <Button onClick={() => setLimit(100)} variant="secondary">100</Button>
+              </ButtonGroup>
+            </ButtonToolbar>
+
             <div className="col">
               <div className="card shadow-sm">
                 <img
