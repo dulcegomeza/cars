@@ -22,7 +22,7 @@ function ModelProvider({ children }) {
     async (page=1, limit=9 ) => {
       const data = {
         limit:limit, 
-        page: page
+        pag: page
       }
       
       try {
