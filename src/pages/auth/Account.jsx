@@ -47,8 +47,8 @@ function Account() {
 
   return (
 
-    <main className="form-signin w-100 m-auto">
-      <form onSubmit={createUser}>
+    <div className="form-signin w-100 m-auto animate__animated animate__fadeIn">
+      <form className='animate__animated animate__fadeIn' onSubmit={createUser}>
         <h3 className="mt-6 mb-4 display-5 text-center">Registrarse</h3>
         <div className="form-floating mb-4">
           <input type="text" className="form-control" id="floatingName" name="name" placeholder="Nombre" value={formulario.name} onChange={handleInputChange} />
@@ -68,7 +68,7 @@ function Account() {
         </div>
         <LoadingButton isLoading={isLoading} text="Unirse" />
       </form>
-    </main>
+    </div>
 
 
   )

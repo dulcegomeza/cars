@@ -44,10 +44,9 @@ function Login() {
 
   return (
     <>
-      <body class="h-100">
-        <div class="container h-100">
+        <div class="container h-100 ">
           <div clas="row h-100 justify-content-center align-items-center">
-            <form onSubmit={loginForm} className="p-3" >
+            <form onSubmit={loginForm} className="p-3 animate__animated animate__fadeIn" >
               <h1>Inicio de sesión</h1>
               <div className="mb-3">
                 <label htmlFor="exampleInputEmail1" className="form-label">
@@ -81,8 +80,6 @@ function Login() {
             </form>
           </div>
         </div>
-      </body>
-
     </>
   );
 }

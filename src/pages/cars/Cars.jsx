@@ -39,7 +39,7 @@ function Cars() {
 
   return (
     <>
-      <div className="album py-5 bg-light">
+      <div className="album py-5 bg-light animate__animated animate__fadeIn">
         <div className="container">
           <div className="row mb-2">
             <ButtonToolbar
@@ -67,7 +67,7 @@ function Cars() {
                   <div className="card-body">
                     <h3>{model.model}</h3>
                     <span class="badge text-bg-secondary">{model.brand.name}</span>
-                    <p className="card-text">$ {model.price}</p>
+                    <p className="card-text fw-bold">$ {model.price}</p>
                     <p className="card-text"> {model.description}</p>
                     <div className="d-flex justify-content-between align-items-center">
                     {user.uid ?
@@ -94,3 +94,4 @@ function Cars() {
 }
 
 export default Cars
+

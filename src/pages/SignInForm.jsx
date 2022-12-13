@@ -43,16 +43,17 @@ const SignInForm = () => {
   return (
     <>
       <div className="row align-items-center g-lg-5 py-5">
+        
         <div className="col-lg-7 text-center text-lg-start">
-          <h1 className="display-4 fw-bold lh-1 mb-3">
+          <h1 className="display-4 fw-bold lh-1 mb-3 animate__animated animate__fadeIn">
             Listo para comenzar el viaje?
           </h1>
-          <p className="col-lg-10 fs-4">
+          <p className="col-lg-10 fs-4 animate__animated animate__fadeIn">
             Estas a un paso de manejar el auto de tus sueños
           </p>
         </div>
 
-        <div className="col-md-10 mx-auto col-lg-5">
+        <div className="col-md-10 mx-auto col-lg-5 animate__animated animate__fadeIn">
           <form onSubmit={createUser} className="p-4 p-md-5 border rounded-3 bg-light">
             <div className="form-floating mb-3">
               <input

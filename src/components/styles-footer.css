@@ -7,3 +7,8 @@
     margin-right: 0.5em;
     color: #727171;
 }
+
+
+li>a:hover{
+    color: black !important;
+}
