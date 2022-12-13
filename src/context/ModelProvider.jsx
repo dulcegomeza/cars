@@ -131,10 +131,10 @@ function ModelProvider({ children }) {
         payload: model,
       });
 
-      alert('success','Carro añadido!');
+      alert('success',`Carro ${res.model} añadido!`);
 
     }else{
-      alert('info','El carro seleccionado ya se encuentra añadido en el carrito de compras');
+      alert('info',`Carro ${res.model} ya se encuentra añadido en el carrito de compras`);
     }
   };
 

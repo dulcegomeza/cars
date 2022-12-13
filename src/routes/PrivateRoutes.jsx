@@ -4,7 +4,7 @@ import Cars from '../pages/cars/Cars'
 import NavbarPrivate from '../components/NavbarPrivate'
 import NotFound from '../pages/NotFound'
 import Profile from '../pages/profile/Profile'
-import Cart from '../components/Cart'
+import Cart from '../pages/Cart'
 
 
 export const PrivateRoutes = () => {
