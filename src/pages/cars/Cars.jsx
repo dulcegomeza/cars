@@ -6,6 +6,7 @@ import Button from 'react-bootstrap/Button';
 import ButtonGroup from 'react-bootstrap/ButtonGroup';
 import ButtonToolbar from 'react-bootstrap/ButtonToolbar';
 import Pagination from 'react-bootstrap/Pagination';
+import './styles-cars.css';
 
 function Cars() {
   let items = [];
@@ -13,6 +14,7 @@ function Cars() {
 
   const { models, total, total_pages, getModels, addModelToCart } = useContext(ModelContext);
   const [limit, setLimit] = useState(9);
+
 
   useEffect(() => {
     verifyingToken();
@@ -57,7 +59,7 @@ function Cars() {
             </ButtonToolbar>
 
             {models.map((model) => (
-              <div className="col-md-4 mb-2" key={model.uid}>
+              <div className="col-md-6 col-lg-4 mb-2" key={model.uid}>
                 <div className="card shadow-sm">
                   <img
                     src={model.imgs[0]}
@@ -66,8 +68,7 @@ function Cars() {
                   />
                   <div className="card-body">
                     <h3>{model.model}</h3>
-                    <span class="badge text-bg-secondary">{model.brand.name}</span>
-                    <p className="card-text fw-bold">$ {model.price}</p>
+                    <p className="card-text fw-bold">  <span class="badge text-bg-secondary">{model.brand.name}</span> $ {model.price}</p>
                     <p className="card-text"> {model.description}</p>
                     <div className="d-flex justify-content-between align-items-center">
                     {user.uid ?
