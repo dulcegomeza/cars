@@ -57,7 +57,7 @@ function Cars() {
             </ButtonToolbar>
 
             {models.map((model) => (
-              <div className="col-md-4" key={model.uid}>
+              <div className="col-md-4 mb-2" key={model.uid}>
                 <div className="card shadow-sm">
                   <img
                     src={model.imgs[0]}
@@ -70,9 +70,10 @@ function Cars() {
                     <p className="card-text">$ {model.price}</p>
                     <p className="card-text"> {model.description}</p>
                     <div className="d-flex justify-content-between align-items-center">
+                    {user.uid ?
                       <div className="btn-group">
                         <button type="button" onClick={() => addModelToCart(model.uid)} className="btn btn-sm btn-outline-secondary">Agregar</button>
-                      </div>
+                      </div>:<></>}
                     </div>
                   </div>
                 </div>

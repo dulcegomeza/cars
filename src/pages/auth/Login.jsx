@@ -36,6 +36,7 @@ function Login() {
         err.response.data.msg,
         'error'
       )
+      console.log(err);
       setIsLoading(false);
     }
   }

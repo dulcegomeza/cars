@@ -32,7 +32,6 @@ function Account() {
     try {
       const user = await signupService(formulario);
       console.log(user);
-      //antes se usaba el history.push('/ruta') antes de la version 6 de react-router-dom
       navigate("/login");
     } catch (err) {
       console.log(err.response.data);

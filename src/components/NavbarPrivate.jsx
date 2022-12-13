@@ -1,6 +1,21 @@
-import { NavLink } from 'react-router-dom'
+import { useContext } from "react";
+import { NavLink, useNavigate } from 'react-router-dom';
+import { UserContext } from "../context/UserContext";
+
 
 const Navbar = () => {
+
+  const { logout } = useContext(UserContext);
+
+  const navigate = useNavigate();
+
+  const onLogout = () => {
+      logout();
+      navigate('/login', {
+          replace: true
+      });
+  }
+
   return (
     <>
       <nav className="navbar navbar-expand-lg bg-light">
@@ -27,6 +42,12 @@ const Navbar = () => {
 
                 </ul>
               </li>
+              <button
+                    className="nav-item  btn btn-blanck-form"
+                    onClick={onLogout}
+                >
+                    Salir
+                </button>
 
             </ul>
           </div>
